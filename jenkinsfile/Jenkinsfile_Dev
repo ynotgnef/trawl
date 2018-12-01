@@ -1,0 +1,34 @@
+pipeline {
+    agent none
+    stages {
+        stage('test') {
+            agent medium
+            steps {
+                //git diff-tree --no-commit-id --name-only -r <commit_hash> to get list of changed files
+                //run rspec on script for changes
+                //run cucumber on app
+                //update test status
+                //continue if passing AND master branch
+            }
+        }
+        stage('generate_position') {
+            steps {
+
+            }
+        }
+        stage('update_position_to_app')
+            steps {
+
+            }
+        stage('wait_for_approval') {
+            steps {
+
+            }
+        }
+        stage('execute_position') {
+
+        }
+        stage('send_notification')
+
+    }
+}
