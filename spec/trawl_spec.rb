@@ -54,14 +54,16 @@ RSpec.describe TrawlHelpers, '#retrieve_price' do
     it 'retrieves a single attribute' do
       out = TrawlHelpers.retrieve_price(ticker, period, attribute_1)
       out.each do |date, values|
-        values[attribute_1].is_a?(Float).should eq true
+        is_number = values[attribute_1].is_a?(Float) || values[attribute_1].is_a?(Integer)
+        is_number.should eq true
       end
     end
     it 'retrieves a two attributes' do
       out = TrawlHelpers.retrieve_price(ticker, period, attribute_1, attribute_2)
       out.each do |date, values|
-        values[attribute_1].is_a?(Float).should eq true
-        values[attribute_2].is_a?(Float).should eq true
+        is_1_number = values[attribute_1].is_a?(Float) || values[attribute_1].is_a?(Integer)
+        is_2_number = values[attribute_2].is_a?(Float) || values[attribute_2].is_a?(Integer)
+        (is_1_number && is_2_number).should eq true
       end
     end
   end
