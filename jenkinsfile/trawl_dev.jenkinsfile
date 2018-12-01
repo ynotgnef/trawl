@@ -2,7 +2,7 @@ pipeline {
     agent none
     stages {
         stage('test') {
-            agent label medium
+            agent { label 'medium' }
             steps {
                 //git diff-tree --no-commit-id --name-only -r <commit_hash> to get list of changed files
                 //run rspec on script for changes
@@ -19,25 +19,25 @@ pipeline {
             }
         }
         stage('update_position_to_app')
-            agent label medium //micro
+            agent { label 'medium' } //'micro' }
             steps {
                 echo 'update_position_to_app'
             }
         stage('wait_for_approval') {
-            agent labelmedium //micro
+            agent { label 'medium' } //'micro' }
             steps {
 
             }
         }
         stage('execute_position') {
-            agent label medium //micro
+            agent { label 'medium' } //'micro' }
             steps {
                 echo 'execute_position'
             }
 
         }
         stage('send_notification') {
-            agent label master
+            agent { label 'master' }
             steps {
                 echo 'notification'
             }
