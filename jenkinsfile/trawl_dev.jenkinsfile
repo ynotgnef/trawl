@@ -9,26 +9,39 @@ pipeline {
                 //run cucumber on app
                 //update test status
                 //continue if passing AND master branch
+                echo 'test'
             }
         }
         stage('generate_position') {
+            agent medium
             steps {
-
+                echo 'generate_position'
             }
         }
         stage('update_position_to_app')
+            agent medium //micro
             steps {
-
+                echo 'update_position_to_app'
             }
         stage('wait_for_approval') {
+            agent medium //micro
             steps {
 
             }
         }
         stage('execute_position') {
+            agent medium //micro
+            steps {
+                echo 'execute_position'
+            }
 
         }
-        stage('send_notification')
+        stage('send_notification') {
+            agent master
+            steps {
+                echo 'notification'
+            }
+        }
 
     }
 }
