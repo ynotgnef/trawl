@@ -1,0 +1,7 @@
+trawl:
+  build: .
+  environment:
+    - P_PROCESSES=2
+    - P_THREADS=3
+  volumes:
+    - ./results:/app/results

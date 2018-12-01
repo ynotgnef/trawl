@@ -1,0 +1,5 @@
+screener_endpoint: https://finviz.com/screener.ashx?v=111&f=sh_curvol_o500,sh_price_u10&r=
+screener_increment: 20
+
+trawl_thread_count: <% ENV['TRAWL_THREAD_COUNT'] || 1 %>
+trawl_partition_size: <% ENV['TRAWL_PARTITION_SIZE'] || 10 %>
