@@ -6,3 +6,5 @@ gem 'rspec'
 gem 'parallel'
 gem 'require_all'
 gem 'stock_quote'
+
+ruby '2.5.2'
