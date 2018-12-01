@@ -18,11 +18,12 @@ pipeline {
                 echo 'generate_position'
             }
         }
-        stage('update_position_to_app')
+        stage('update_position_to_app') {
             agent { label 'medium' } //'micro' }
             steps {
                 echo 'update_position_to_app'
             }
+        }
         stage('wait_for_approval') {
             agent { label 'medium' } //'micro' }
             steps {
