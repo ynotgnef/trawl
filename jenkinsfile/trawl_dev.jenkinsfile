@@ -13,7 +13,7 @@ pipeline {
             }
         }
         stage('generate_position') {
-            agent label medium
+            agent { label 'medium' }
             steps {
                 echo 'generate_position'
             }
