@@ -27,7 +27,7 @@ pipeline {
         stage('wait_for_approval') {
             agent { label 'medium' } //'micro' }
             steps {
-
+                echo 'wait_for_approval'
             }
         }
         stage('execute_position') {
