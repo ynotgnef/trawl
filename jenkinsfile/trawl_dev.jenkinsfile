@@ -1,44 +1,60 @@
 pipeline {
-    agent none
+    agent { label 'medium' }
+
+    parameters {
+        name: 'GIT_BRANCH', string defaultValue: 'develop', description: '', trim: false
+    }
+
     stages {
-        stage('test') {
-            agent { label 'medium' }
+        stage('setup') {
             steps {
-                //git diff-tree --no-commit-id --name-only -r <commit_hash> to get list of changed files
-                //run rspec on script for changes
-                //run cucumber on app
-                //update test status
-                //continue if passing AND master branch
-                echo 'test'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "${params.GIT_BRANCH}"]],
+                    userRemoteConfigs: [[
+                        credentialsId: 'github',
+                        url: 'https://github.com/ynotgnef/trawl.git'
+                    ]]
+                ])
+                sh '''#!/bin/bash -l
+                    rvm use --create --install --binary 2.5.2
+                    gem install bundler
+                    rm Gemfile.lock || true
+                    bundle install --jobs 3
+                '''
+            }
+        }
+        stage('test') {
+            steps {
+                sh '''#!/bin/bash -l
+                    rspec
+                '''
             }
         }
         stage('generate_position') {
-            agent { label 'medium' }
             steps {
-                echo 'generate_position'
+                sh '''#!/bin/bash -l
+                    bundle exec ruby tickers.rb
+                '''
             }
         }
         stage('update_position_to_app') {
-            agent { label 'medium' } //'micro' }
             steps {
                 echo 'update_position_to_app'
             }
         }
         stage('wait_for_approval') {
-            agent { label 'medium' } //'micro' }
             steps {
                 echo 'wait_for_approval'
             }
         }
         stage('execute_position') {
-            agent { label 'medium' } //'micro' }
             steps {
                 echo 'execute_position'
             }
 
         }
         stage('send_notification') {
-            agent { label 'master' }
             steps {
                 echo 'notification'
             }
