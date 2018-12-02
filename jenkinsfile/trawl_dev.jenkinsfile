@@ -2,7 +2,7 @@ pipeline {
     agent { label 'medium' }
 
     parameters {
-        name: 'GIT_BRANCH', string defaultValue: 'develop', description: '', trim: false
+        string(name: 'GIT_BRANCH', defaultValue: 'develop', description: '', trim: false)
     }
 
     stages {
